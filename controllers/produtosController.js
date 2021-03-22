@@ -18,28 +18,6 @@ exports.get = (req, res, next) =>{
     });
 };
 
-exports.post =  (req, res, next) =>{
-    Firebird.attach(options,function(err,db){
-        if(err){
-            return res.status(400).send(err);
-        }
-
-        const pName = `'`+req.body.name+`'`;
-        const pBalance = req.body.balance;
-        const pPrice = req.body.price;
-
-        const qry = 'INSERT INTO PRODUTOS (ID,DESCRICAO,SALDO,VENDA) '+
-                    'VALUES ( (SELECT MAX(ID)+1 FROM PRODUTOS), '+pName+', '+pBalance+', '+pPrice+' )';
-        
-        db.query(qry, function(err,vals){
-            if(err){
-                return res.status(400).send({message: 'Falha ao cadastrar produto'+qry, data: err});
-            }
-            return res.status(201).send({message: 'Produto cadastrado!'});
-        });
-    });
-};
-
 exports.getByID = (req, res, next) =>{
     Firebird.attach(options,function(err,db){
         if(err){
@@ -69,6 +47,28 @@ exports.getByName = (req, res, next) =>{
                 return res.status(400).send({message: 'Falha ao encontrar produto', data: err});
             }
             return res.status(200).send(vals);
+        });
+    });
+};
+
+exports.post =  (req, res, next) =>{
+    Firebird.attach(options,function(err,db){
+        if(err){
+            return res.status(400).send(err);
+        }
+
+        const pName = `'`+req.body.name+`'`;
+        const pBalance = req.body.balance;
+        const pPrice = req.body.price;
+
+        const qry = 'INSERT INTO PRODUTOS (ID,DESCRICAO,SALDO,VENDA) '+
+                    'VALUES ( (SELECT MAX(ID)+1 FROM PRODUTOS), '+pName+', '+pBalance+', '+pPrice+' )';
+        
+        db.query(qry, function(err,vals){
+            if(err){
+                return res.status(400).send({message: 'Falha ao cadastrar produto'+qry, data: err});
+            }
+            return res.status(201).send({message: 'Produto cadastrado!'});
         });
     });
 };

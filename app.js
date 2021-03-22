@@ -17,11 +17,6 @@ const authe = require('./authController');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false}));
 
-//app.use(basicAuth({
-    //users: { 'admin' : 'supersecret' }
-//    users: authe.authType()
-//}));
-
 app.use(basicAuth( { authorizer: authe.myAuthorizer, authorizeAsync: true, } ));
  
 app.use('/', indexRoute);
