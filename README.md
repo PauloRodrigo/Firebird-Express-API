@@ -6,5 +6,7 @@ In it, I use the Express framework, along with some other resources with the pur
 
 
 How to run:
-npm install --save express 
+
+npm install --save express
+
 npm install --save node-firebird
