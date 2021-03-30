@@ -23,6 +23,8 @@ app.use('/', indexRoute);
 app.use('/users', usersRoute);
 app.use('/produtos', produtosRoute);
 
-app.listen(port);
+app.listen(port, () => {
+    console.log(`Application listening at http://localhost:${port}`)
+})
 
 module.exports = app;

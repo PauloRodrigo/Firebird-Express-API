@@ -66,7 +66,7 @@ exports.post =  (req, res, next) =>{
         
         db.query(qry, function(err,vals){
             if(err){
-                return res.status(400).send({message: 'Falha ao cadastrar produto'+qry, data: err});
+                return res.status(400).send({message: 'Falha ao cadastrar produto - '+qry, data: err});
             }
             return res.status(201).send({message: 'Produto cadastrado!'});
         });
