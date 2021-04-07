@@ -9,7 +9,7 @@ exports.get = (req, res, next) =>{
             return res.status(400).send(err);
         }
         
-        db.query('SELECT * FROM PRODUTOS', function(err,vals){
+        db.query('SELECT id, descricao, saldo, venda FROM PRODUTOS', function(err,vals){
             if(err){
                 return res.status(400).send(err);
             }
@@ -25,7 +25,7 @@ exports.getByID = (req, res, next) =>{
         }
         const id = req.params.id;
 
-        db.query('SELECT * FROM PRODUTOS where ID = '+id, function(err,vals){
+        db.query('SELECT id, descricao, saldo, venda FROM PRODUTOS where ID = '+id, function(err,vals){
             if(err){
                 return res.status(400).send(err);
             }
@@ -40,7 +40,7 @@ exports.getByName = (req, res, next) =>{
             return res.status(400).send(err);
         }
         const name = `'%`+req.params.name+`%'`;
-        const qry = 'SELECT * FROM PRODUTOS where (DESCRICAO LIKE '+name+')';
+        const qry = 'SELECT id, descricao, saldo, venda FROM PRODUTOS where (DESCRICAO LIKE '+name+')';
 
         db.query(qry, function(err,vals){
             if(err){
